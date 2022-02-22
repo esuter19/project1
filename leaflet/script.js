@@ -22,23 +22,19 @@ $.getJSON("https://esuter19.github.io/project1/leaflet/MO_Hospitals.geojson",fun
 $.getJSON("https://esuter19.github.io/project1/leaflet/USA_2016_Daytime_Population.geojson",function(data){
   
   var counties = L.geoJson(data ,{
-		geometryToLayer: function(feature,latlng){
-			var marker = L.marker(latlng);
-	  		marker.bindPopup(feature.properties.NAME + '<br/>'+feature.properties.TOTPOP_CY);
-	  		return marker;
-  		},
     style:style
 	});
   
+  function popup(feature,layer){
+    layer.bindPopup(feature.properties.NAME+"<br>Population:"+feature.properties.TOTPOP_CY);
+  }
+  
   function getColor(d) {
-    return d > 1000000 ? '#800026' :
-           d > 500000  ? '#BD0026' :
-           d > 100000  ? '#E31A1C' :
-           d > 50000  ? '#FC4E2A' :
-           d > 25000   ? '#FD8D3C' :
-           d > 10000   ? '#FEB24C' :
-           d > 5000   ? '#FED976' :
-                      '#FFEDA0';
+    return d > 500000 ? '#08519c' :
+           d > 100000  ? '#3182bd' :
+           d > 50000  ? '#6baed6' :
+           d > 25000   ? '#9ecae1' :
+           d > 10000   ? '#c6dbef'      :'#eff3ff'
 }
 
 function style(feature) {
@@ -46,9 +42,10 @@ function style(feature) {
         fillColor: getColor(feature.properties.TOTPOP_CY),
         weight: 2,
         opacity: 1,
+        color:"black",
         fillOpacity: 0.7
     };
 }
   
-  L.geoJson(data,{style: style}).addTo(map);
+  L.geoJson(data,{style: style, onEachFeature:popup}).addTo(map);
 });
