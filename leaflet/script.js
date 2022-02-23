@@ -4,9 +4,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-$.getJSON("https://esuter19.github.io/project1/leaflet/MO_Hospitals.geojson",function(data){
+$.getJSON("../common/MO_Hospitals.geojson",function(data){
 	var hospitalIcon = L.icon({
-		iconUrl: "https://www.pinclipart.com/picdir/big/16-167195_medical-cross-symbol-png-clipart.png",
+		iconUrl: "../common/16-167195_medical-cross-symbol-png-clipart.png",
 		iconSize: [10,10]
 	});
   
@@ -19,7 +19,7 @@ $.getJSON("https://esuter19.github.io/project1/leaflet/MO_Hospitals.geojson",fun
 
 
 
-$.getJSON("https://esuter19.github.io/project1/leaflet/USA_2016_Daytime_Population.geojson",function(data){
+$.getJSON("../common/USA_2016_Daytime_Population.geojson",function(data){
   
   var counties = L.geoJson(data ,{
     style:style
