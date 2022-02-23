@@ -132,7 +132,7 @@ require(
         hospitals.renderer = {type: 'simple', symbol: hsymbol};
 
 
-        var map = new Map({basemap: 'streets'});
+        var map = new Map({basemap: 'osm'});
 
         var view = new MapView({
             container: 'viewDiv',
