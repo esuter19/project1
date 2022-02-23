@@ -1,10 +1,11 @@
-require(["esri/Map", "esri/views/SceneView", "esri/layers/GeoJSONLayer", "esri/widgets/Legend"], (
+require(["esri/Map", "esri/views/SceneView", "esri/layers/GeoJSONLayer", "esri/widgets/Legend", "esri/layers/FeatureLayer"], (
         Map,
         SceneView,
         GeoJSONLayer,
-        Legend
+        Legend,
+        FeatureLayer
       ) => {
-        
+  
         const renderer = {
           type: "simple",
           symbol: {
@@ -16,7 +17,7 @@ require(["esri/Map", "esri/views/SceneView", "esri/layers/GeoJSONLayer", "esri/w
             ]
           },
           visualVariables: [
-            {
+            /*{
               type: "size",
               field: "TOTPOP_CY",
               legendOptions: {
@@ -34,7 +35,7 @@ require(["esri/Map", "esri/views/SceneView", "esri/layers/GeoJSONLayer", "esri/w
                   label: "1,001,814"
                 }
               ]
-            },
+            },*/
             {
               type: "color",
               field: "TOTPOP_CY",
@@ -81,6 +82,7 @@ require(["esri/Map", "esri/views/SceneView", "esri/layers/GeoJSONLayer", "esri/w
           url:
             "https://esuter19.github.io/project1/leaflet/USA_2016_Daytime_Population.geojson",
           renderer: renderer,
+          opacity: 0.9,
           title: "Missouri County Population and Number of Hospitals",
           outFields: ["*"],
           popupTemplate: {
@@ -97,10 +99,26 @@ require(["esri/Map", "esri/views/SceneView", "esri/layers/GeoJSONLayer", "esri/w
             ]
           }
         });
+ 
+  const hospitals = new FeatureLayer({
+            url:
+                'https://services2.arcgis.com/kNS2ppBA4rwAQQZy/arcgis/rest/services/MO_Hospitals/FeatureServer',
+            outFields: ['*']
+        });
+
+        var hsymbol = {
+            type: 'picture-marker',
+            url:
+                'https://esuter19.github.io/project1/16-167195_medical-cross-symbol-png-clipart.png',
+            width: '10px',
+            height: '10px'
+        };
+
+        hospitals.renderer = {type: 'simple', symbol: hsymbol};
 
         const map = new Map({
-          basemap: "gray-vector",
-          layers: [povLayer]
+          basemap: "osm",
+          layers: [povLayer, hospitals]
         });
 
         const view = new SceneView({
