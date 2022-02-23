@@ -149,4 +149,10 @@ require(
         });
         map.add(counties);
         map.add(hospitals);
+            
+        const legend = new Legend({
+          view: view
+        });
+
+        view.ui.add(legend, "bottom-left");
     });
