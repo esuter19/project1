@@ -80,7 +80,7 @@ require(["esri/Map", "esri/views/SceneView", "esri/layers/GeoJSONLayer", "esri/w
 
         const povLayer = new GeoJSONLayer({
           url:
-            "https://esuter19.github.io/project1/leaflet/USA_2016_Daytime_Population.geojson",
+            "../common/USA_2016_Daytime_Population.geojson",
           renderer: renderer,
           opacity: 0.9,
           title: "Missouri County Population and Number of Hospitals",
@@ -109,7 +109,7 @@ require(["esri/Map", "esri/views/SceneView", "esri/layers/GeoJSONLayer", "esri/w
         var hsymbol = {
             type: 'picture-marker',
             url:
-                'https://esuter19.github.io/project1/16-167195_medical-cross-symbol-png-clipart.png',
+                '../common/16-167195_medical-cross-symbol-png-clipart.png',
             width: '10px',
             height: '10px'
         };
